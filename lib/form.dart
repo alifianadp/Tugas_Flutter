@@ -1,5 +1,6 @@
 import 'package:counter_7/main.dart';
 import 'package:counter_7/data.dart';
+import 'package:counter_7/drawer.dart';
 import 'package:flutter/material.dart';
 
 class DataBudget{
@@ -28,43 +29,8 @@ class _AddFormPageState extends State<AddFormPage> {
       appBar: AppBar(
         title: Text('Form Budget'),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('counter_7'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Tambah Budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddFormPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Data Budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ShowDataPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      // Menambahkan drawer menu
+      drawer: const AppDrawer(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
