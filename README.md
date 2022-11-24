@@ -391,10 +391,13 @@ Variabel yang terdampak adalah statefulWidgets karena variabel ini dapat berubah
     - DropdownButton -> untuk mendapatkan input dari pilihan yang telah disediakan
     - TextButton -> untuk menampilkan Text yang berupa button
     - Expanded -> untuk memperluas bidang column/row
-    - Sized Box -> untuk menampilkan judul masing-masing
-    - Box Decoration -> untuk mengatur tampilan dari box
+    - Inkwell -> untuk widget dapat diklik 
     - Future builder -> untuk mengolah data dari hasil konversi json
     - Async -> untuk menerima http response yang akan dikonversi ke json
+    - Stack -> untuk membuat widget-widget dapat saling bertumpuk
+    - Center -> untuk membuat child berada di tengah
+    - RichText -> untuk memuat tampilan text yang berbeda-beda
+    - Align -> untuk membuat child berada di tempat yang diinginkan
 
 3. <b>Jelaskan mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.</b><br>
     Pertama buat model. Kemudian tambahkan dependensi HTTP dan buat HTTP request ke web service. Lalu, lakukan decode response ke dalam bentuk json dan konversi data json menjadi object. Terakhir gunakan widget Future Builder untuk menampilkan data sebelumnya.<br>
@@ -425,16 +428,22 @@ Variabel yang terdampak adalah statefulWidgets karena variabel ini dapat berubah
   4. <u>Menambahkan halaman detail untuk setiap mywatchlist<br></u>
       - Membuat file `watchlistdetail.dart` pada folder `page` di dalam foler `lib`
       - Halaman ini akan menampilkan detail dari Judul Watch List yang ditekan
-
   5. <u>Menambahkan tombol untuk kembali ke daftar mywatchlist<br></u>
       - Menambahkan kode berikut pada file `watchlistdetail.dart`
       ```
-      TextButton(
-          onPressed: () {
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+        width: double.infinity,
+        height: 40,
+        child: TextButton(
+            onPressed: () {
             Navigator.pop(context);
-          },
-          child: const Text('Back'),
+            },
+                child: const Text('Back'),
+            ),
         ),
+      )
       ```
 
         

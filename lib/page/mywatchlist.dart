@@ -16,7 +16,7 @@ class ShowWatchList extends StatefulWidget {
 }
 
 class _ShowWatchListState extends State<ShowWatchList> {
-  Future<List<MyWatchList>> fetchToDo() async {
+  Future<List<MyWatchList>> fetchWatchList() async {
         var url = Uri.parse('https://tugas2-catalog-pbp.herokuapp.com/mywatchlist/json/');
         var response = await http.get(
         url,
@@ -49,7 +49,7 @@ class _ShowWatchListState extends State<ShowWatchList> {
       // Menambahkan drawer menu
       drawer: const AppDrawer(),
       body: FutureBuilder(
-        future: fetchToDo(),
+        future: fetchWatchList(),
         builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
             return const Center(child: CircularProgressIndicator());
@@ -69,47 +69,41 @@ class _ShowWatchListState extends State<ShowWatchList> {
             } else {
                 return ListView.builder(
                     itemCount: snapshot.data!.length,
-                    itemBuilder: (_, index)=> Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                        color:Colors.white,
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 2.0
+                    itemBuilder: (_, index)=> InkWell(
+                      onTap:(){
+                          Details.getFields = snapshot.data![index].fields;
+                          Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder:(context) => const WatchListDetail())
+                          );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: BoxDecoration(
+                            color:Colors.white,
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 2.0
+                            )
+                            ]
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${snapshot.data![index].fields.title}",
+                                style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ]
                         )
-                        ]
-                    ),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${snapshot.data![index].fields.title}",
-                            style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                              TextButton(
-                                onPressed: () {
-                                  Details.getFields =
-                                      snapshot.data![index].fields;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const WatchListDetail()
-                                      )
-                                  );
-                                },
-                                child: Text('Details'),
-                            ),
-                        ]
-                    )
+                      )
                 )
               );
             }

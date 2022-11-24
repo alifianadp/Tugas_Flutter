@@ -25,20 +25,59 @@ class _WatchListDetailState extends State<WatchListDetail> {
       ),
       // Menambahkan drawer menu
       drawer: const AppDrawer(),
-      body: Column(children: [
-        Text(Details.fetcher.title),
-        Text('Release Date : ' + Details.fetcher.releaseDate),
-        Text('Rating : ' + Details.fetcher.rating.toString()),
-        Text('Status : ' + Details.fetcher.watched),
-        Text('Review : ' + Details.fetcher.review),
-        const Spacer(),
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Back'),
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 20, ),
+        padding: const EdgeInsets.all(20.0),
+        child: Stack (
+          children: [
+            Center(
+              heightFactor: 0.5, 
+                child: Container(
+                    // padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.only(bottom: 100, ),
+                    child: Text(
+                        Details.fetcher.title,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,),
+                    ),
+                ),
+            ),
+
+            RichText(
+              text: TextSpan(
+                  style: const TextStyle(color: Colors.black,),
+                  children: [
+                      const TextSpan(text:'Release Date:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: Details.fetcher.releaseDate), 
+                      const TextSpan(text: '\n', ),
+                      const TextSpan(text:'\nRating:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: Details.fetcher.rating.toString()), 
+                      const TextSpan(text: '\n', ),
+                      const TextSpan(text:'\nStatus:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                      if (Details.fetcher.watched == 'Yes') TextSpan(text: 'watched'),
+                      if (Details.fetcher.watched == 'No') TextSpan(text: 'unwatched'),
+                      const TextSpan(text: '\n', ),
+                      const TextSpan(text:'\nReview:  ', style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: Details.fetcher.review), 
+                  ],
+              ),
+            ),
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+            width: double.infinity,
+            height: 40,
+            child: TextButton(
+                onPressed: () {
+                Navigator.pop(context);
+                },
+                    child: const Text('Back'),
+                ),
+            ),
+          )
+        ]
         ),
-      ]),
+      ),
     );
   }
 }
