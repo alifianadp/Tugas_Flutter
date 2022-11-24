@@ -374,8 +374,67 @@ Variabel yang terdampak adalah statefulWidgets karena variabel ini dapat berubah
         ),
         ```
         
+# <b>Tugas 8</b>
 
+## Pertanyaan
 
+1. <b>Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?</b><br>
+  Ya, hal tersebut dapat dilakukan dengan menngunakan library dari flutter (code generation library) yaitu json_serializeable. Penggunaan metode tersebut sesuai untuk data json dengan skala sedang ke besar, sedangkan untuk skala kecil penggunaan model lebih efektif dan mudah dilakukan.<br>
+2. <b>Sebutkan widget apa saja yang kamu pakai di proyek kali ini dan jelaskan fungsinya.</b><br>
+    - AppBar -> untuk menampilkan title dari aplikasi
+    - Row & Column -> untuk layout widget perbaris/perkolom
+    - Floating Action Button -> untuk menampilkan Button Decrement dan Increment
+    - Container -> untuk menampung widget Button Decrement dan Increment
+    - Text -> untuk menampilkan teks salah satunya "Page Counter" pada appbar
+    - Drawer -> untuk navigasi ke page yang berbeda pada app
+    - TextFormField -> untuk mendapatkan input berupa string
+    - DropdownButton -> untuk mendapatkan input dari pilihan yang telah disediakan
+    - TextButton -> untuk menampilkan Text yang berupa button
+    - Expanded -> untuk memperluas bidang column/row
+    - Sized Box -> untuk menampilkan judul masing-masing
+    - Box Decoration -> untuk mengatur tampilan dari box
+    - Future builder -> untuk mengolah data dari hasil konversi json
+    - Async -> untuk menerima http response yang akan dikonversi ke json
 
+3. <b>Jelaskan mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.</b><br>
+    Pertama buat model. Kemudian tambahkan dependensi HTTP dan buat HTTP request ke web service. Lalu, lakukan decode response ke dalam bentuk json dan konversi data json menjadi object. Terakhir gunakan widget Future Builder untuk menampilkan data sebelumnya.<br>
+
+4. <b>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.</b><br>
+  1. <u>Menambahkan tombol navigasi pada drawer/hamburger untuk ke halaman mywatchlist.<br></u>
+      - Menambahkan kode berikut pada file `drawer.dart`
+      ```
+      ListTile(
+              title: const Text('My Watch List'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ShowWatchList()),
+                );
+              },
+            ),
+      ```
+  2. <u>Membuat satu file dart yang berisi model mywatchlist.<br></u>
+      - Membuat file `mywatchlist_model.dart` pada folder `model` di dalam foler `lib`
+      - Menempelkan hasil kode dari Quicktype
+      - Menambahkan dependensi HTTP
+  3. <u>Menambahkan halaman mywatchlist<br></u>
+      - Membuat file `mywatchlist.dart` pada folder `page` di dalam foler `lib`
+      - File akan melakukan pengambilan data dari `https://tugas2-catalog-pbp.herokuapp.com/mywatchlist/json/` dan menampilkan Judul Watch List yang ada
+      - Ketika Judul Watch List ditekan maka akan mengarahkan ke halaman detail
+  4. <u>Menambahkan halaman detail untuk setiap mywatchlist<br></u>
+      - Membuat file `watchlistdetail.dart` pada folder `page` di dalam foler `lib`
+      - Halaman ini akan menampilkan detail dari Judul Watch List yang ditekan
+
+  5. <u>Menambahkan tombol untuk kembali ke daftar mywatchlist<br></u>
+      - Menambahkan kode berikut pada file `watchlistdetail.dart`
+      ```
+      TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Back'),
+        ),
+      ```
 
         

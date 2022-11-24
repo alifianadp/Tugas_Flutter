@@ -1,6 +1,7 @@
-import 'package:counter_7/form.dart';
+import 'package:counter_7/page/form.dart';
 import 'package:counter_7/main.dart';
-import 'package:counter_7/data.dart';
+import 'package:counter_7/page/data.dart';
+import 'package:counter_7/page/mywatchlist.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -49,6 +50,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const ShowDataPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('My Watch List'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ShowWatchList()),
                 );
               },
             ),

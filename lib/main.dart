@@ -1,6 +1,7 @@
-import 'package:counter_7/form.dart';
-import 'package:counter_7/data.dart';
-import 'package:counter_7/drawer.dart';
+import 'package:counter_7/page/form.dart';
+import 'package:counter_7/page/data.dart';
+import 'package:counter_7/page/drawer.dart';
+import 'package:counter_7/page/mywatchlist.dart';
 import 'package:flutter/material.dart';
 
 void main() {
